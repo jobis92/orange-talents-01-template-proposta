@@ -1,6 +1,7 @@
 package br.com.zup.proposta.novaproposta;
 
 import java.net.URI;
+import java.util.HashMap;
 
 import javax.validation.Valid;
 
@@ -26,12 +27,18 @@ public class NovaPropostaController {
 			UriComponentsBuilder uriBuilder) {
 		Proposta proposta = request.toModel();
 
+		if (propostaRepository.existsByDocumento(request.getDocumento())) {
+			HashMap<String, Object> resposta = new HashMap<>();
+
+			resposta.put("mensagem", "Já existe documento cadastrado");
+
+			return ResponseEntity.unprocessableEntity().body(resposta);
+		}
+
 		propostaRepository.save(proposta);
 
-		URI location = uriBuilder.path("/api/propostas/{id}")
-				.buildAndExpand(proposta.getId())
-				.toUri();
-		
+		URI location = uriBuilder.path("/api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
+
 		return ResponseEntity.created(location).build();
 	}
 
