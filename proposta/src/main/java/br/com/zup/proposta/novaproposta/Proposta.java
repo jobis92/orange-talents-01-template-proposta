@@ -1,10 +1,11 @@
 package br.com.zup.proposta.novaproposta;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,6 +44,9 @@ public class Proposta {
 	@Embedded
 	private Endereco endereco;
 
+	@Enumerated(EnumType.STRING)
+	private Status status;
+
 	@Deprecated
 	Proposta() {
 
@@ -60,6 +64,18 @@ public class Proposta {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getDocumento() {
+		return documento;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void atualizaStatus(Status status) {
+		this.status = status;
 	}
 
 }

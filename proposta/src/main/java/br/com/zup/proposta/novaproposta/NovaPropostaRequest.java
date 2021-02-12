@@ -50,7 +50,7 @@ public class NovaPropostaRequest {
 	}
 
 	public Proposta toModel() {
-		return new Proposta(documento, email, nome, salario, new Endereco(endereco.getLogradouro(), endereco.getCep(),
+		return new Proposta(documento, email, nome, salario, new Endereco(endereco.getCep(), endereco.getLogradouro(),
 				endereco.getNumero(), endereco.getComplemento()));
 	}
 

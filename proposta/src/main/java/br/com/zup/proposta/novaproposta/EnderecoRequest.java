@@ -7,12 +7,12 @@ public class EnderecoRequest {
 	private String numero;
 	private String complemento;
 
-	public String getLogradouro() {
-		return logradouro;
-	}
-
 	public String getCep() {
 		return cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
 	}
 
 	public String getNumero() {

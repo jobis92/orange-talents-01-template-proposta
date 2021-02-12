@@ -12,20 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import feign.FeignException;
+
 @RestController
 @RequestMapping(value = "/api/propostas")
 public class NovaPropostaController {
 
 	private final PropostaRepository propostaRepository;
+	private final AnaliseClient analiseClient;
 
-	public NovaPropostaController(PropostaRepository propostaRepository) {
+	public NovaPropostaController(PropostaRepository propostaRepository, AnaliseClient analiseClient) {
 		this.propostaRepository = propostaRepository;
+		this.analiseClient = analiseClient;
 	}
 
 	@PostMapping
 	public ResponseEntity<?> cadastro(@RequestBody @Valid NovaPropostaRequest request,
 			UriComponentsBuilder uriBuilder) {
-		Proposta proposta = request.toModel();
 
 		if (propostaRepository.existsByDocumento(request.getDocumento())) {
 			HashMap<String, Object> resposta = new HashMap<>();
@@ -33,6 +36,19 @@ public class NovaPropostaController {
 			resposta.put("mensagem", "Já existe documento cadastrado");
 
 			return ResponseEntity.unprocessableEntity().body(resposta);
+		}
+		Proposta proposta = request.toModel();
+
+		propostaRepository.save(proposta);
+
+		try {
+			analiseClient.consulta(new AnaliseClient.ConsultaStatusRequest(proposta));
+			proposta.atualizaStatus(Status.ELEGIVEL);
+			
+		} catch (FeignException.UnprocessableEntity ex) {
+			
+			proposta.atualizaStatus(Status.NAO_ELEGIVEL);
+			
 		}
 
 		propostaRepository.save(proposta);
