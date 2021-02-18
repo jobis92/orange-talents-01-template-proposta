@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface AnaliseClient {
 
 	@PostMapping(value = "/api/solicitacao")
-
 	ConsultaStatusRequest consulta(@RequestBody ConsultaStatusRequest consultaStatusRequest);
 
 	class ConsultaStatusRequest {

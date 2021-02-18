@@ -2,6 +2,7 @@ package br.com.zup.proposta.novaproposta;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,12 +10,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import br.com.zup.proposta.cartao.Cartao;
+import br.com.zup.proposta.novaproposta.CartaoClient.ConsultaCartaoResponse;
 import br.com.zup.proposta.validacao.CpfOuCnpj;
 
 @Entity
@@ -45,7 +49,12 @@ public class Proposta {
 	private Endereco endereco;
 
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private EnumStatus status;
+
+	private String idCartao;
+
+	@OneToOne(mappedBy = "proposta", cascade = CascadeType.ALL)
+	private Cartao cartao;
 
 	@Deprecated
 	Proposta() {
@@ -59,7 +68,14 @@ public class Proposta {
 		this.nome = nome;
 		this.salario = salario;
 		this.endereco = endereco;
+	}
 
+	
+	@Override
+	public String toString() {
+		return "Proposta [id=" + id + ", documento=" + documento + ", email=" + email + ", nome=" + nome + ", salario="
+				+ salario + ", endereco=" + endereco + ", status=" + status + ", idCartao=" + idCartao + ", cartao="
+				+ cartao + "]";
 	}
 
 	public Long getId() {
@@ -74,8 +90,16 @@ public class Proposta {
 		return nome;
 	}
 
-	public void atualizaStatus(Status status) {
+	public void atualizaStatus(EnumStatus status) {
 		this.status = status;
 	}
 
+	public EnumStatus getStatus() {
+
+		return status;
+	}
+
+	public void vincularCartao(ConsultaCartaoResponse response) {
+		 this.cartao = new Cartao(response,this);
+	}
 }

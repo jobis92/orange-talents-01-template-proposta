@@ -1,9 +1,14 @@
 package br.com.zup.proposta.novaproposta;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-public interface PropostaRepository extends JpaRepository<Proposta, Long> {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+public interface PropostaRepository extends JpaRepository<Proposta, Long>, JpaSpecificationExecutor<Proposta> {
 
 	boolean existsByDocumento(String documento);
+
+	List<Proposta> findByStatusAndCartaoNull(EnumStatus status);
 
 }

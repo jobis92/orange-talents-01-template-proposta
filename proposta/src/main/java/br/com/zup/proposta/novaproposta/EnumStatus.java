@@ -1,6 +1,6 @@
 package br.com.zup.proposta.novaproposta;
 
-public enum Status {
+public enum EnumStatus {
 		ELEGIVEL,
 		NAO_ELEGIVEL
 }
