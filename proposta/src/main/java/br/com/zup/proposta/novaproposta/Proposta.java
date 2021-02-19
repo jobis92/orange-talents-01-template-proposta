@@ -89,6 +89,28 @@ public class Proposta {
 	public String getNome() {
 		return nome;
 	}
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public BigDecimal getSalario() {
+		return salario;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public String getIdCartao() {
+		return idCartao;
+	}
+
+	public Cartao getCartao() {
+		return cartao;
+	}
 
 	public void atualizaStatus(EnumStatus status) {
 		this.status = status;
@@ -101,5 +123,6 @@ public class Proposta {
 
 	public void vincularCartao(ConsultaCartaoResponse response) {
 		 this.cartao = new Cartao(response,this);
+		 this.idCartao = response.getId();
 	}
 }

@@ -27,4 +27,22 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+	
+	
+
 }

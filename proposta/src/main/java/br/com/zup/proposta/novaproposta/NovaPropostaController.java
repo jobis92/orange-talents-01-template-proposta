@@ -2,19 +2,19 @@ package br.com.zup.proposta.novaproposta;
 
 import java.net.URI;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.proposta.novaproposta.CartaoClient.ConsultaCartaoResponse;
 import feign.FeignException;
 
 @RestController
@@ -23,13 +23,14 @@ public class NovaPropostaController {
 
 	private final PropostaRepository propostaRepository;
 	private final AnaliseClient analiseClient;
-	private final CartaoClient cartaoClient;
+
+	private final VinculaCartaoProposta cartaoProposta;
 
 	public NovaPropostaController(PropostaRepository propostaRepository, AnaliseClient analiseClient,
-			CartaoClient cartaoClient) {
+			VinculaCartaoProposta cartaoProposta) {
 		this.propostaRepository = propostaRepository;
 		this.analiseClient = analiseClient;
-		this.cartaoClient = cartaoClient;
+		this.cartaoProposta = cartaoProposta;
 	}
 
 	@PostMapping
@@ -57,32 +58,22 @@ public class NovaPropostaController {
 		}
 		propostaRepository.save(proposta);
 
-		vinculaCartaoProposta();
+		cartaoProposta.vinculaCartaoProposta();
 
 		URI location = uriBuilder.path("/api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
 		return ResponseEntity.created(location).build();
 	}
 
-	@Scheduled(fixedDelay = 5000)
-	public void vinculaCartaoProposta() {
-
-		List<Proposta> lista = propostaRepository.findByStatusAndCartaoNull(EnumStatus.ELEGIVEL);
-		for (Proposta proposta : lista) {
-			try {
-
-				ConsultaCartaoResponse resposta = cartaoClient.consulta(proposta.getId().toString());
-				
-				if (resposta.getId() != null) {
-					proposta.vincularCartao(resposta);
-					propostaRepository.save(proposta);
-					
-				}
-			} catch (FeignException.InternalServerError e) {
-				System.out.println("Cartão não existente para a proposta" + proposta.getId());
-			}
+	@GetMapping("/{idProposta}")
+	public ResponseEntity<?> consulta(@PathVariable Long idProposta) {
+		Optional<Proposta> proposta = propostaRepository.findById(idProposta);
+		if (proposta.isPresent()) {
+			return ResponseEntity.ok(new DetalhesDaProposta(proposta.get()));
 
 		}
+
+		return ResponseEntity.notFound().build();
 
 	}
 
