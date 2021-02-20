@@ -9,6 +9,8 @@ public interface PropostaRepository extends JpaRepository<Proposta, Long>, JpaSp
 
 	boolean existsByDocumento(String documento);
 
+//	@Lock(LockModeType.PESSIMISTIC_WRITE)
+//	@QueryHints({ @QueryHint(name = "javax.persistence.lock.timeout", value = (LockOptions.SKIP_LOCKED + "")) })
 	List<Proposta> findByStatusAndCartaoNull(EnumStatus status);
 
 }

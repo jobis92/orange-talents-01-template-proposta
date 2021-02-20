@@ -2,6 +2,8 @@ package br.com.zup.proposta.novaproposta;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +22,9 @@ public class VinculaCartaoProposta {
 		this.cartaoClient = cartaoClient;
 	}
 
+	@Transactional
 	@Scheduled(fixedDelay = 5000)
-	 void vinculaCartaoProposta() {
+	void vinculaCartaoProposta() {
 
 		List<Proposta> lista = propostaRepository.findByStatusAndCartaoNull(EnumStatus.ELEGIVEL);
 		for (Proposta proposta : lista) {

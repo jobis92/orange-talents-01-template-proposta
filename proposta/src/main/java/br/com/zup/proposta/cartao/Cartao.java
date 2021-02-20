@@ -31,6 +31,8 @@ public class Cartao {
 
 	@OneToOne
 	private Proposta proposta;
+	
+	
 
 	@Deprecated
 	public Cartao() {
