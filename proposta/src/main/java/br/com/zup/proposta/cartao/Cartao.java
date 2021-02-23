@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,8 +33,9 @@ public class Cartao {
 
 	@OneToOne
 	private Proposta proposta;
-	
-	
+
+	@Enumerated(EnumType.STRING)
+	private EnumStatusCartao statusCartao;
 
 	@Deprecated
 	public Cartao() {
@@ -72,4 +75,7 @@ public class Cartao {
 		return limite;
 	}
 
+	public void atualizaStatusCartao(EnumStatusCartao statusCartao) {
+		this.statusCartao = statusCartao;
+	}
 }

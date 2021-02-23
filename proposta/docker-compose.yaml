@@ -134,7 +134,46 @@ services:
       VAULT_TOKEN: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_ADDR: http://127.0.0.1:8200
 
+  proposta:
+    image: joaopaulo/proposta
+    container_name: proposta
+    #network_mode: bridge
+    ports:
+      - 8080:8080
+    depends_on:
+      - proposta-db
+      - analise
+      - contas
+      - keycloak
+    environment:
+      - DATABASE_URL=jdbc:mysql://localhost:3306/proposta?useTimezone=true&serverTimezone=UTC&createDatabaseIfNotExist=true
+      - DATABASE_USERNAME=root
+      - DATABASE_PASSWORD=jpamvelox21
+      - ANALISE_HOST=analise:9999
+      - CONTAS_HOST=contas:8888
+      - CONSULTA_CARTAO_FIXED_RATE=10000
+      - KEYCLOAK_ISSUER_URI=http://keycloak:8080/auth/realms/nosso-cartao
+      - KEYCLOAK_JWK_URI=http://keycloak:8080/auth/realms/nosso-cartao/protocol/openid-connect/certs
+      - JAEGER_ENABLED=true
+      - JAEGER_SAMPLER=1
+      - JAEGER_ENDPOINT=http://jaeger:14268/api/traces
+
+  proposta-db:
+    image: 'mysql:5.7'
+    container_name: proposta-db
+    expose:
+      - 3306
+    ports:
+      - 13306:3306
+    volumes:
+      - proposta-mysql-volume:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=jpamvelox21
+      - MYSQL_DATABASE=proposta
+      - MYSQL_ROOT_HOST=%
+
 volumes:
   grafana-volume:
   prometheus-volume:
   postgres-volume:
+  proposta-mysql-volume:
