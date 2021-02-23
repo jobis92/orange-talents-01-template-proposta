@@ -6,6 +6,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+
+
+
 import feign.FeignException;
 
 @RestController
@@ -23,9 +28,10 @@ public class NovaPropostaController {
 
 	private final PropostaRepository propostaRepository;
 	private final AnaliseClient analiseClient;
-
 	private final VinculaCartaoProposta cartaoProposta;
 
+	private final Logger logger = LoggerFactory.getLogger(Proposta.class);
+	
 	public NovaPropostaController(PropostaRepository propostaRepository, AnaliseClient analiseClient,
 			VinculaCartaoProposta cartaoProposta) {
 		this.propostaRepository = propostaRepository;
@@ -62,6 +68,7 @@ public class NovaPropostaController {
 
 		URI location = uriBuilder.path("/api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
 
+		logger.info("Proposta documento={} salário={} criada com sucesso!", proposta.getDocumento(), proposta.getSalario());
 		return ResponseEntity.created(location).build();
 	}
 

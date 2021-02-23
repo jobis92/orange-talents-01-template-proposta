@@ -1,5 +1,7 @@
 package br.com.zup.proposta.Biometria;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,13 +24,18 @@ public class Biometria {
 	@NotBlank
 	private String biometria;
 
+	private LocalDateTime dataBiometria;
+
+
+
 	@NotNull
 	@ManyToOne
 	private @NotNull Cartao cartao;
 
-	public Biometria(@NotBlank String biometria, @NotNull Cartao cartao) {
+	public Biometria(@NotBlank String biometria, @NotNull Cartao cartao, LocalDateTime dataBiometria) {
 		this.biometria = biometria;
 		this.cartao = cartao;
+		this.dataBiometria = dataBiometria;
 	}
 
 	public Long getId() {
@@ -37,6 +44,14 @@ public class Biometria {
 
 	public String getBiometria() {
 		return biometria;
+	}
+	
+	public LocalDateTime getDataBiometria() {
+		return dataBiometria;
+	}
+
+	public Cartao getCartao() {
+		return cartao;
 	}
 
 }
