@@ -9,10 +9,12 @@ public class NovaBiometriaRequest {
 	@NotBlank
 	private String biometria;
 
+	@Deprecated
+	public NovaBiometriaRequest() {
+	}
+
 	public NovaBiometriaRequest(@NotBlank String biometria) {
-
 		this.biometria = biometria;
-
 	}
 
 	public String getBiometria() {

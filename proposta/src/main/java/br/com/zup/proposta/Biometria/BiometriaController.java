@@ -1,7 +1,6 @@
 package br.com.zup.proposta.Biometria;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 
 import javax.validation.Valid;
@@ -43,7 +42,7 @@ public class BiometriaController {
 
 			return ResponseEntity.badRequest().body(resposta);
 		}
-		Biometria biometria = new Biometria(request.getBiometria(), cartao, LocalDateTime.now());
+		Biometria biometria = new Biometria(request.getBiometria(), cartao);
 		biometriaRepository.save(biometria);
 
 		URI location = uriBuilder.path("/cartoes/{idCartao}/biometrias/{idBiometria}")

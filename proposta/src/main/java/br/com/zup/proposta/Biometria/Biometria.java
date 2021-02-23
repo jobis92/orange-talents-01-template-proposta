@@ -26,16 +26,18 @@ public class Biometria {
 
 	private LocalDateTime dataBiometria;
 
-
-
 	@NotNull
 	@ManyToOne
 	private @NotNull Cartao cartao;
 
-	public Biometria(@NotBlank String biometria, @NotNull Cartao cartao, LocalDateTime dataBiometria) {
+	@Deprecated
+	public Biometria() {
+	}
+
+	public Biometria(@NotBlank String biometria, @NotNull Cartao cartao) {
 		this.biometria = biometria;
 		this.cartao = cartao;
-		this.dataBiometria = dataBiometria;
+		this.dataBiometria = LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -45,7 +47,7 @@ public class Biometria {
 	public String getBiometria() {
 		return biometria;
 	}
-	
+
 	public LocalDateTime getDataBiometria() {
 		return dataBiometria;
 	}
