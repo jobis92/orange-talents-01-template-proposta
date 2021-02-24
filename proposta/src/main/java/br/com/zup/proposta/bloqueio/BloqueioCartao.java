@@ -2,12 +2,16 @@ package br.com.zup.proposta.bloqueio;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import br.com.zup.proposta.cartao.Cartao;
 
 @Entity
 @Table(name = "bloqueios")
@@ -18,7 +22,8 @@ public class BloqueioCartao {
 	private Long id;
 
 	@NotNull
-	private Long cartaoId;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Cartao cartao;
 
 	private LocalDateTime dataBloqueio;
 
@@ -26,8 +31,12 @@ public class BloqueioCartao {
 
 	private String userAgent;
 
-	public BloqueioCartao(@NotNull Long cartaoId, String ip, String userAgent) {
-		this.cartaoId = cartaoId;
+	@Deprecated
+	public BloqueioCartao() {
+	}
+
+	public BloqueioCartao(@NotNull Cartao cartao, String ip, String userAgent) {
+		this.cartao = cartao;
 		this.dataBloqueio = LocalDateTime.now();
 		this.ip = ip;
 		this.userAgent = userAgent;
@@ -37,8 +46,8 @@ public class BloqueioCartao {
 		return id;
 	}
 
-	public Long getCartao() {
-		return cartaoId;
+	public Cartao getCartao() {
+		return cartao;
 	}
 
 	public LocalDateTime getDataBloqueio() {
@@ -53,4 +62,6 @@ public class BloqueioCartao {
 		return userAgent;
 	}
 
+	
+	
 }

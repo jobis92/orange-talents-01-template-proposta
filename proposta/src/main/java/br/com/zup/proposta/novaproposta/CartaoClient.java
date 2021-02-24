@@ -11,13 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.zup.proposta.bloqueio.BloqueioCartaoRequest;
 
-@FeignClient(name = "cartaoCliente", url = "http://localhost:8888/api/cartoes")
+
+
+@FeignClient(name = "cartaoCliente", url = "http://localhost:8888")
 public interface CartaoClient {
 
-	@GetMapping
+	@GetMapping("/api/cartoes")
 	ConsultaCartaoResponse consulta(@RequestParam String idProposta);
 
-	@PostMapping(value = "/{id}/bloqueios")
+	@PostMapping(value = "/api/cartoes/{id}/bloqueios")
 	void bloqueio(@PathVariable String id, BloqueioCartaoRequest bloqueioCartaoRequest);
 
 	class ConsultaCartaoResponse {

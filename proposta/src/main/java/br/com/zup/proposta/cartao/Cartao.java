@@ -37,6 +37,8 @@ public class Cartao {
 	@Enumerated(EnumType.STRING)
 	private EnumStatusCartao statusCartao;
 
+	
+
 	@Deprecated
 	public Cartao() {
 	}
@@ -49,6 +51,8 @@ public class Cartao {
 		this.proposta = proposta;
 	}
 
+
+	
 	@Override
 	public String toString() {
 		return "Cartao [id=" + id + ", numero=" + numero + ", emitidoEm=" + emitidoEm + ", titular=" + titular
@@ -73,6 +77,10 @@ public class Cartao {
 
 	public BigDecimal getLimite() {
 		return limite;
+	}
+	
+	public EnumStatusCartao getStatusCartao() {
+		return statusCartao;
 	}
 
 	public void atualizaStatusCartao(EnumStatusCartao statusCartao) {
