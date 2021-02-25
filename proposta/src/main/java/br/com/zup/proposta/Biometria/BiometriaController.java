@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.proposta.cartao.Cartao;
 import br.com.zup.proposta.cartao.CartaoRepository;
-import br.com.zup.proposta.novaproposta.Proposta;
 
 @RestController
 public class BiometriaController {
@@ -27,7 +26,7 @@ public class BiometriaController {
 
 	@Autowired
 	private BiometriaRepository biometriaRepository;
-	
+
 	private final Logger logger = LoggerFactory.getLogger(Biometria.class);
 
 	@PostMapping("/cartoes/{id}/biometrias")
@@ -52,7 +51,7 @@ public class BiometriaController {
 
 		URI location = uriBuilder.path("/cartoes/{idCartao}/biometrias/{idBiometria}")
 				.buildAndExpand(cartao.getId(), biometria.getId()).toUri();
-		
+
 		logger.info("Biometria criada para o cartao={} com sucesso!", cartao.getNumero());
 		return ResponseEntity.created(location).build();
 	}

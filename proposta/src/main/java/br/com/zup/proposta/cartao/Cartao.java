@@ -37,8 +37,6 @@ public class Cartao {
 	@Enumerated(EnumType.STRING)
 	private EnumStatusCartao statusCartao;
 
-	
-
 	@Deprecated
 	public Cartao() {
 	}
@@ -49,10 +47,9 @@ public class Cartao {
 		this.titular = response.getTitular();
 		this.limite = response.getLimite();
 		this.proposta = proposta;
+		this.statusCartao = EnumStatusCartao.DESBLOQUEADO;
 	}
 
-
-	
 	@Override
 	public String toString() {
 		return "Cartao [id=" + id + ", numero=" + numero + ", emitidoEm=" + emitidoEm + ", titular=" + titular
@@ -78,7 +75,7 @@ public class Cartao {
 	public BigDecimal getLimite() {
 		return limite;
 	}
-	
+
 	public EnumStatusCartao getStatusCartao() {
 		return statusCartao;
 	}
