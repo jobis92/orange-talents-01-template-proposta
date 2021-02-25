@@ -4,10 +4,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "analiseCliente", url = "http://localhost:9999")
+@FeignClient(name = "analiseCliente", url = "${analise.host}")
 public interface AnaliseClient {
 
-	@PostMapping(value = "/api/solicitacao")
+	@PostMapping()
 	ConsultaStatusRequest consulta(@RequestBody ConsultaStatusRequest consultaStatusRequest);
 
 	class ConsultaStatusRequest {

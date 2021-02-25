@@ -1,6 +1,5 @@
 package br.com.zup.proposta.bloqueio;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.zup.proposta.cartao.Cartao;
 import br.com.zup.proposta.cartao.CartaoRepository;
@@ -38,8 +36,7 @@ public class BloqueioCartaoController {
 	private final Logger logger = LoggerFactory.getLogger(BloqueioCartao.class);
 
 	@PostMapping("/api/cartoes/{id}/bloqueios")
-	public ResponseEntity<?> bloqueio(@PathVariable Long id, UriComponentsBuilder uriBuilder,
-			HttpServletRequest request) {
+	public ResponseEntity<?> bloqueio(@PathVariable Long id, HttpServletRequest request) {
 
 		Optional<Cartao> cartao = cartaoRepository.findById(id);
 		Optional<BloqueioCartao> cartoesBloqueados = bloqueioCartaoRepository.findById(id);
@@ -61,14 +58,12 @@ public class BloqueioCartaoController {
 					request.getHeader("User-Agent"));
 
 			bloqueioCartaoRepository.save(bloqueioCartao);
-			
-			
+
 			cartao.get().atualizaStatusCartao(EnumStatusCartao.BLOQUEADO);
 			cartaoRepository.save(cartao.get());
-			URI location = uriBuilder.path("/{id}").buildAndExpand(bloqueioCartao.getId()).toUri();
 
 			logger.info("Bloqueio realizado para cartao={}!", cartao.get().getNumero());
-			return ResponseEntity.created(location).build();
+			return ResponseEntity.ok().build();
 
 		}
 		return ResponseEntity.notFound().build();

@@ -13,13 +13,13 @@ import br.com.zup.proposta.bloqueio.BloqueioCartaoRequest;
 
 
 
-@FeignClient(name = "cartaoCliente", url = "http://localhost:8888")
+@FeignClient(name = "cartaoCliente", url = "${cartoes.host}")
 public interface CartaoClient {
 
-	@GetMapping("/api/cartoes")
+	@GetMapping()
 	ConsultaCartaoResponse consulta(@RequestParam String idProposta);
 
-	@PostMapping(value = "/api/cartoes/{id}/bloqueios")
+	@PostMapping(value = "{id}/bloqueios")
 	void bloqueio(@PathVariable String id, BloqueioCartaoRequest bloqueioCartaoRequest);
 
 	class ConsultaCartaoResponse {

@@ -16,6 +16,7 @@
 	<description>Teste de proposta</description>
 	<properties>
 		<java.version>11</java.version>
+		<ch.qos.logback.version>1.2.3</ch.qos.logback.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -84,7 +85,42 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>6.4</version>
+		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>${ch.qos.logback.version}</version>
+			</dependency>
+
+			<dependency>
+
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${ch.qos.logback.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-access</artifactId>
+				<version>${ch.qos.logback.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
