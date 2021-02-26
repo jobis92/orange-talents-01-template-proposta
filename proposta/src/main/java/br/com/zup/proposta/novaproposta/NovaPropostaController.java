@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.zup.proposta.metricas.MinhasMetricas;
 import feign.FeignException;
 
 @RestController
@@ -28,16 +26,14 @@ public class NovaPropostaController {
 	private final PropostaRepository propostaRepository;
 	private final AnaliseClient analiseClient;
 	private final VinculaCartaoProposta cartaoProposta;
-	private final MinhasMetricas minhasMetricas;
 
 	private final Logger logger = LoggerFactory.getLogger(Proposta.class);
 
 	public NovaPropostaController(PropostaRepository propostaRepository, AnaliseClient analiseClient,
-			VinculaCartaoProposta cartaoProposta, @Lazy MinhasMetricas minhasMetricas) {
+			VinculaCartaoProposta cartaoProposta) {
 		this.propostaRepository = propostaRepository;
 		this.analiseClient = analiseClient;
 		this.cartaoProposta = cartaoProposta;
-		this.minhasMetricas = minhasMetricas;
 	}
 
 	@PostMapping
@@ -64,12 +60,9 @@ public class NovaPropostaController {
 
 		}
 		propostaRepository.save(proposta);
-
 		cartaoProposta.vinculaCartaoProposta();
 
 		URI location = uriBuilder.path("/api/propostas/{id}").buildAndExpand(proposta.getId()).toUri();
-
-		minhasMetricas.meuContador();
 
 		logger.info("Proposta documento={} salário={} criada com sucesso!", proposta.getDocumento(),
 				proposta.getSalario());
@@ -81,13 +74,10 @@ public class NovaPropostaController {
 		Optional<Proposta> proposta = propostaRepository.findById(idProposta);
 		if (proposta.isPresent()) {
 
-//			minhasMetricas.meuTimer(idProposta);
 			return ResponseEntity.ok(new DetalhesDaProposta(proposta.get()));
 
 		}
-
 		return ResponseEntity.notFound().build();
-
 	}
 
 }

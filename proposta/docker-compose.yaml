@@ -134,9 +134,9 @@ services:
       VAULT_TOKEN: ee413645-dbe8-4848-afc6-6bb2768ada75
       VAULT_ADDR: http://127.0.0.1:8200
 
-  proposta:
-    image: joaopaulo/proposta
-    container_name: proposta
+  proposta-api:
+    image: joaopaulo/proposta-api
+    container_name: proposta-api
     #network_mode: bridge
     ports:
       - 8080:8080

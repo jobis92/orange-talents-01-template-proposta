@@ -23,6 +23,8 @@ import br.com.zup.proposta.cartao.Cartao;
 import br.com.zup.proposta.cartao.CartaoRepository;
 import br.com.zup.proposta.novaproposta.CartaoClient;
 import feign.FeignException;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
 
 @RestController
 @RequestMapping("/api/cartoes")
@@ -42,6 +44,7 @@ public class NovaCarteiraController {
 		this.cartaoRepository = cartaoRepository;
 		this.bloqueioCartaoRepository = bloqueioCartaoRepository;
 		this.cartaoClient = cartaoClient;
+
 	}
 
 	@PostMapping("/{id}/carteiras")
@@ -58,27 +61,26 @@ public class NovaCarteiraController {
 
 			try {
 
-					Optional<Carteira> carteiraExistente = carteiraRepository
-							.findByEnumCarteiraAndCartao(carteiraRequest.getCarteira(), cartao.get());
+				Optional<Carteira> carteiraExistente = carteiraRepository
+						.findByEnumCarteiraAndCartao(carteiraRequest.getCarteira(), cartao.get());
 
-					if (carteiraExistente.isPresent()) {
-						return ResponseEntity.unprocessableEntity().body(
-								"Esse cartão já está vinculado a carteira " + carteiraRequest.getCarteira() + " !");
-					}
+				if (carteiraExistente.isPresent()) {
+					return ResponseEntity.unprocessableEntity()
+							.body("Esse cartão já está vinculado a carteira " + carteiraRequest.getCarteira() + " !");
+				}
 
-					cartaoClient.carteira(cartao.get().getNumero(), new NovaCarteiraRequest(carteiraRequest));
-					Carteira carteira = carteiraRequest.toModel(cartao.get());
-					cartao.get().adicionaCarteiraDigital(carteira);
-					carteiraRepository.save(carteira);
+				cartaoClient.carteira(cartao.get().getNumero(), new NovaCarteiraRequest(carteiraRequest));
+				Carteira carteira = carteiraRequest.toModel(cartao.get());
+				cartao.get().adicionaCarteiraDigital(carteira);
+				carteiraRepository.save(carteira);
 
-					URI location = uriBuilder.path("/cartoes/{id}/carteiras/{id}").build(cartao.get().getId(),
-							carteira.getId());
+				URI location = uriBuilder.path("/cartoes/{id}/carteiras/{id}").build(cartao.get().getId(),
+						carteira.getId());
 
-					logger.info("Carteira={} digital criada com sucesso para o email={}!", carteira.getEnumCarteira(),
-							cartao.get().getNumero());
+				logger.info("Carteira={} digital criada com sucesso para o email={}!", carteira.getEnumCarteira(),
+						cartao.get().getNumero());
 
-					return ResponseEntity.created(location).build();
-			
+				return ResponseEntity.created(location).build();
 
 			} catch (FeignException.UnprocessableEntity ex) {
 				Map<String, Object> badRequest = new HashMap<>();
