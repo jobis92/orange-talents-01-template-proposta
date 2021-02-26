@@ -9,11 +9,11 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.zup.proposta.bloqueio.BloqueioCartao;
@@ -24,23 +24,28 @@ import br.com.zup.proposta.novaproposta.CartaoClient;
 import feign.FeignException;
 
 @RestController
+@RequestMapping("/api/cartoes")
 public class NovoAvisoController {
 
-	@Autowired
 	private CartaoRepository cartaoRepository;
 
-	@Autowired
 	private BloqueioCartaoRepository bloqueioCartaoRepository;
 
-	@Autowired
 	private CartaoClient cartaoClient;
 
-	@Autowired
 	private AvisoRepository avisoRepository;
 
 	private final Logger logger = LoggerFactory.getLogger(Aviso.class);
 
-	@PostMapping("/api/cartoes/{id}/avisos")
+	public NovoAvisoController(CartaoRepository cartaoRepository, BloqueioCartaoRepository bloqueioCartaoRepository,
+			CartaoClient cartaoClient, AvisoRepository avisoRepository) {
+		this.cartaoRepository = cartaoRepository;
+		this.bloqueioCartaoRepository = bloqueioCartaoRepository;
+		this.cartaoClient = cartaoClient;
+		this.avisoRepository = avisoRepository;
+	}
+
+	@PostMapping("/{id}/avisos")
 	public ResponseEntity<?> aviso(@PathVariable Long id, HttpServletRequest request,
 			@RequestBody @Valid NovoAvisoRequest avisoRequest) {
 
@@ -52,9 +57,7 @@ public class NovoAvisoController {
 				return ResponseEntity.unprocessableEntity().body("Seu cartão está bloqueado!");
 			}
 			try {
-			
-				
-				
+
 				cartaoClient.aviso(cartao.get().getNumero(),
 						new NovoAvisoRequest(avisoRequest.getDestino(), avisoRequest.getValidoAte()));
 
@@ -66,7 +69,8 @@ public class NovoAvisoController {
 
 			Aviso aviso = new Aviso(cartao.get(), avisoRequest.getDestino(), avisoRequest.getValidoAte(),
 					request.getRemoteAddr(), request.getHeader("User-Agent"));
-
+			cartao.get().atualizaAviso(aviso);
+			
 			avisoRepository.save(aviso);
 
 			logger.info("Aviso realizado para o cartao={}!", cartao.get().getNumero());

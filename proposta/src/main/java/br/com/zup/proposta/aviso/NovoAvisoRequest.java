@@ -18,10 +18,12 @@ public class NovoAvisoRequest {
 	}
 
 	public NovoAvisoRequest(@NotBlank String destino, @Future LocalDate validoAte) {
-
+		super();
 		this.destino = destino;
 		this.validoAte = validoAte;
 	}
+
+
 
 	public String getDestino() {
 		return destino;

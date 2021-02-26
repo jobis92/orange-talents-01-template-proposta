@@ -80,7 +80,7 @@ public class NovaPropostaController {
 	public ResponseEntity<?> consulta(@PathVariable Long idProposta) {
 		Optional<Proposta> proposta = propostaRepository.findById(idProposta);
 		if (proposta.isPresent()) {
-			
+
 //			minhasMetricas.meuTimer(idProposta);
 			return ResponseEntity.ok(new DetalhesDaProposta(proposta.get()));
 
@@ -89,7 +89,5 @@ public class NovaPropostaController {
 		return ResponseEntity.notFound().build();
 
 	}
-
-
 
 }

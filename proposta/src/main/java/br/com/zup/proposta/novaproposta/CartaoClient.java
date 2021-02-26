@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.zup.proposta.aviso.NovoAvisoRequest;
 import br.com.zup.proposta.bloqueio.BloqueioCartaoRequest;
+import br.com.zup.proposta.carteira.NovaCarteiraRequest;
 
 @FeignClient(name = "cartaoCliente", url = "${cartoes.host}")
 public interface CartaoClient {
@@ -23,6 +24,9 @@ public interface CartaoClient {
 
 	@PostMapping(value = "{id}/avisos")
 	void aviso(@PathVariable String id, NovoAvisoRequest novoAvisoRequest);
+
+	@PostMapping(value = "{id}/carteiras")
+	void carteira(@PathVariable String id, NovaCarteiraRequest novaCarteiraRequest);
 
 	class ConsultaCartaoResponse {
 		private String id;
