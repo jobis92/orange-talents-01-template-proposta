@@ -3,6 +3,8 @@ package br.com.zup.proposta.novaproposta;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,6 +21,7 @@ import javax.validation.constraints.Positive;
 
 import br.com.zup.proposta.cartao.Cartao;
 import br.com.zup.proposta.novaproposta.CartaoClient.ConsultaCartaoResponse;
+import br.com.zup.proposta.security.CriptografiaConverter;
 import br.com.zup.proposta.validacao.CpfOuCnpj;
 
 @Entity
@@ -35,6 +38,8 @@ public class Proposta {
 
 	@Email
 	@NotBlank
+	@Column(unique = true)
+	@Convert(converter = CriptografiaConverter.class)
 	private String email;
 
 	@NotBlank
@@ -70,7 +75,6 @@ public class Proposta {
 		this.endereco = endereco;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Proposta [id=" + id + ", documento=" + documento + ", email=" + email + ", nome=" + nome + ", salario="
@@ -89,8 +93,6 @@ public class Proposta {
 	public String getNome() {
 		return nome;
 	}
-	
-	
 
 	public String getEmail() {
 		return email;
@@ -122,7 +124,7 @@ public class Proposta {
 	}
 
 	public void vincularCartao(ConsultaCartaoResponse response) {
-		 this.cartao = new Cartao(response,this);
-		 this.idCartao = response.getId();
+		this.cartao = new Cartao(response, this);
+		this.idCartao = response.getId();
 	}
 }
