@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "c3166cdf-ecc5-4182-bee0-2c7995f64919",
+		"name": "Proposta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastro de proposta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQzODE3ODksImlhdCI6MTYxNDM0NTc4OSwianRpIjoiNTg3OWJkYzUtNTZjYi00OWM5LTkyNTAtZmM4OWFkZTAyYzhmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6IjY5ZjNkYmU4LWE4YWYtNGNmMC1iYzg0LTg1MDVmMzc1ZDIwZiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.ZBre8BYMOzNBdUa08u0j0jXAi2qV7fGD1LC9XJx4D2iragRGzZyytRzIMA8BFU0FQMzeWUeTVnPMe8dSRzEJpXl3ixHx6bljTmo7FivS7IbMhJvoaUsSjQLEbIS3Fs8UPYEc_uGEgxzL24I6TGmL29lMUIpKHuO7aXAufQRa1E0rB5XKRCl6rYyvjph8V8pTZ6aL_RiGziyDAy2ZfLthvL3-9iz3llGsFNJIYoO4dzMlRB-AwxvBIeXj14o_zlvWOsCBHSfobjWPQd0DnPEJvem1H4Tffu5Z9kN_UTaIYrzB8WPqlOi-3EeSfG8gXa6umj9DVVZxy2iAJLR6jLAG5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documento\" : \"861.576.220-16\",\r\n    \"email\" : \"tesste@teste.com.br\",\r\n    \"nome\" : \"joao paulo\",\r\n    \"salario\":\"1000.00\",\r\n\r\n    \"endereco\" :{\r\n    \"cep\" : \"11111-21\",\r\n    \"logradouro\" :\"Avenida Antonio \",\r\n    \"numero\":\"250\",\r\n    \"complemento\":\"\"\r\n                }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/propostas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"propostas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar propostas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQyOTQ2MjIsImlhdCI6MTYxNDI1ODYyMiwianRpIjoiMDIwMjBlYzctMGI0OC00MTExLWJiYzQtNjU2OTZhMWFlODE5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6IjJiNTQwZGZkLTMzMzktNGQ5MS1iZjYzLWQ5MTRkOTFmNDZhOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.vayKB0vsMy6fxVQUDD0QVzJRW2fRNN8sz9erj_PqRxlSRNXbaARTAU6cJ1U0FpXGr0yNY5Kbq4yq2FWMokepMpATnXGrfiZu2T9Ag-AjLzxzWqr6gdz5NxMdpovyHFhvfLKlYEtl-W6PMjLAyNb8raUq7FCnplyuoc1J4mY3si2Awqp6wlyRUs43DjehWDQOn4Y5u5HrtDWbx6SU87m0L5RIaNXVevn_YjuDby4Ob-mN6W5p8FVmn9Oa9I4W6_fayfuoVbQpNcDU6z7CANMTCzivU7CZOhPNnr35uX6my7DQj_JOw5zjslBEKLbEKSAQWvpOSp6EeSnpuIN82K_wtQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/propostas/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"propostas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro biometria",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQyOTQ2MjIsImlhdCI6MTYxNDI1ODYyMiwianRpIjoiMDIwMjBlYzctMGI0OC00MTExLWJiYzQtNjU2OTZhMWFlODE5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6IjJiNTQwZGZkLTMzMzktNGQ5MS1iZjYzLWQ5MTRkOTFmNDZhOSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.vayKB0vsMy6fxVQUDD0QVzJRW2fRNN8sz9erj_PqRxlSRNXbaARTAU6cJ1U0FpXGr0yNY5Kbq4yq2FWMokepMpATnXGrfiZu2T9Ag-AjLzxzWqr6gdz5NxMdpovyHFhvfLKlYEtl-W6PMjLAyNb8raUq7FCnplyuoc1J4mY3si2Awqp6wlyRUs43DjehWDQOn4Y5u5HrtDWbx6SU87m0L5RIaNXVevn_YjuDby4Ob-mN6W5p8FVmn9Oa9I4W6_fayfuoVbQpNcDU6z7CANMTCzivU7CZOhPNnr35uX6my7DQj_JOw5zjslBEKLbEKSAQWvpOSp6EeSnpuIN82K_wtQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"biometria\" : \"A12dasDAsd112 \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/cartoes/7/biometrias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cartoes",
+						"7",
+						"biometrias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gerar Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:18080/auth/realms/nosso-cartao",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"auth",
+						"realms",
+						"nosso-cartao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "w7ryvMM4QEKp3l-4-Lvs9ZaV-tRvBtSR_dW5aoJPJ6POaWFn_ekXLwp3YfuiEE3FQyDv4o7sQn355d_UBZH9jxTEfk59_P6ULWQHB6N1pe9H88l_VhtK2i4NPd8pTR8SWSSNvZy-3O_jPm5h6XKcXUVWO-GQSFv9CfxVecebUQnnMIJ4PDIVqOVufyZjibEgsTz4l6Eiuqi4O3LqBF75hXbL10pwAmbyFeo7YgzBek2iUMf0kmNj88ieSekl6tMKUjckrD-M02IsYkcxGD1hI_hcW1CM4-J-FPBs_euHUlTR6ersmirP-ZqcGN7QzNjgKoP2OaHpLYHc3RM9vNf6bQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+						"key": "Authorization",
+						"value": "a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"auth",
+						"realms",
+						"nosso-cartao",
+						"protocol",
+						"openid-connect",
+						"certs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "joaopaulo",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "minha-aplicacao",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "1610ed88-3a65-45ab-950a-c856f9ee17d2",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "meu-primeiro-escopo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "18080",
+					"path": [
+						"auth",
+						"realms",
+						"nosso-cartao",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "bloqueio cartao api",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQyMjMyODQsImlhdCI6MTYxNDE4NzI4NCwianRpIjoiMDczMDhhOGEtNTY5ZS00MTgwLWFhYmYtYmZmM2E1NmViN2IyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6ImZkYmM4YmZlLTgxNGUtNDBmNS04ZjE1LTg1Yjg0ZDg3ZTE5OSIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.WF4UplKiic86H9FNYZLUvZUUkulfeomascsV7GeRqdpleZi-YhFQDIzhODaA2ghkUBhNarwx-krYf7YpovWw_AFVMMx0XwYeUfnrnV-HvQpXMlH8_EtWkqMqhrAdsT2xf6mrl8AgtodOIPPvtWy8zVnckEJSIi8-IebrKp5xj8bOwyh1uXpkAIQS4u78SULIr6HZ3sgRjDfAngplgqpS54ROdsYEo-7l5Nond07jG5hdWmvwT64azZ-Yg5ycGK0lgLHVLJxFzHGp-6FAeZQ0ZIMLPVFUtysNV7jd6m5bUKxcmzDGltElSv9Vj32XUREWjJNCjBQSxYReTadovZ29vw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"sistemaResponsavel\": \"proposta\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cartoes/9/bloqueios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cartoes",
+						"9",
+						"bloqueios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastro Avisos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQzODE3ODksImlhdCI6MTYxNDM0NTc4OSwianRpIjoiNTg3OWJkYzUtNTZjYi00OWM5LTkyNTAtZmM4OWFkZTAyYzhmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6IjY5ZjNkYmU4LWE4YWYtNGNmMC1iYzg0LTg1MDVmMzc1ZDIwZiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.ZBre8BYMOzNBdUa08u0j0jXAi2qV7fGD1LC9XJx4D2iragRGzZyytRzIMA8BFU0FQMzeWUeTVnPMe8dSRzEJpXl3ixHx6bljTmo7FivS7IbMhJvoaUsSjQLEbIS3Fs8UPYEc_uGEgxzL24I6TGmL29lMUIpKHuO7aXAufQRa1E0rB5XKRCl6rYyvjph8V8pTZ6aL_RiGziyDAy2ZfLthvL3-9iz3llGsFNJIYoO4dzMlRB-AwxvBIeXj14o_zlvWOsCBHSfobjWPQd0DnPEJvem1H4Tffu5Z9kN_UTaIYrzB8WPqlOi-3EeSfG8gXa6umj9DVVZxy2iAJLR6jLAG5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n  \"destino\": \"Campinas\",\r\n  \"validoAte\": \"2021-03-02\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cartoes/16/avisos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cartoes",
+						"16",
+						"avisos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/cartoes/19/carteiras",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5UmZydlk0NWptMWxicml5ZG12aFRPVnZCZU5JYlVZZklCWjZ6elpOUzU4In0.eyJleHAiOjE2MTQzODE3ODksImlhdCI6MTYxNDM0NTc4OSwianRpIjoiNTg3OWJkYzUtNTZjYi00OWM5LTkyNTAtZmM4OWFkZTAyYzhmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDoxODA4MC9hdXRoL3JlYWxtcy9ub3Nzby1jYXJ0YW8iLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiZmNhN2ZhOWUtYTNlMC00YmVjLTk0NGEtY2VmMGQ2MzIxZTk1IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoibWluaGEtYXBsaWNhY2FvIiwic2Vzc2lvbl9zdGF0ZSI6IjY5ZjNkYmU4LWE4YWYtNGNmMC1iYzg0LTg1MDVmMzc1ZDIwZiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoicHJvZmlsZSBlbWFpbCBtZXUtcHJpbWVpcm8tZXNjb3BvIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJKb8OjbyBQYXVsbyBBbHZlcyBNYWdybyIsInByZWZlcnJlZF91c2VybmFtZSI6ImpvYW9wYXVsbyIsImdpdmVuX25hbWUiOiJKb8OjbyBQYXVsbyIsImZhbWlseV9uYW1lIjoiQWx2ZXMgTWFncm8iLCJlbWFpbCI6ImpvYW8ubWFncm9AenVwLmNvbS5iciJ9.ZBre8BYMOzNBdUa08u0j0jXAi2qV7fGD1LC9XJx4D2iragRGzZyytRzIMA8BFU0FQMzeWUeTVnPMe8dSRzEJpXl3ixHx6bljTmo7FivS7IbMhJvoaUsSjQLEbIS3Fs8UPYEc_uGEgxzL24I6TGmL29lMUIpKHuO7aXAufQRa1E0rB5XKRCl6rYyvjph8V8pTZ6aL_RiGziyDAy2ZfLthvL3-9iz3llGsFNJIYoO4dzMlRB-AwxvBIeXj14o_zlvWOsCBHSfobjWPQd0DnPEJvem1H4Tffu5Z9kN_UTaIYrzB8WPqlOi-3EeSfG8gXa6umj9DVVZxy2iAJLR6jLAG5A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"tesste@teste.com.br\",\r\n  \"carteira\": \"SAMSUNG_PAY\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/cartoes/19/carteiras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"cartoes",
+						"19",
+						"carteiras"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
